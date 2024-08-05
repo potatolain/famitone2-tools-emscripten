@@ -22,4 +22,4 @@ TBD
 
 ## License 
 
-This code is released under the MIT license. See details in the [license file](./LICENSE)
+This code is released under the MIT license. See details in the [license file](./LICENSE).

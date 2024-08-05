@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include <conio.h>
 #include <memory.h>
 
+#define _stricmp strcasecmp
 
 #define OUT_NESASM	0
 #define OUT_CA65	1

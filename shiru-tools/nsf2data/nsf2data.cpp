@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <conio.h>
 #include <string.h>
 
+#define _stricmp strcasecmp
 
 #define OUT_NESASM	0
 #define OUT_CA65	1
