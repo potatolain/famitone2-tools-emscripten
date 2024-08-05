@@ -8,8 +8,8 @@ build_tool () {
     cp $1.wasm ../../dist
     cd ..
 }
-
 mkdir -p dist
+cd shiru-tools
 build_tool nesasmc
 build_tool nsf2data
 build_tool text2data
