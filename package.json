@@ -1,0 +1,27 @@
+{
+  "name": "famitone2-tools-emscripten",
+  "version": "1.0.0",
+  "description": "Famitone2 tools compiled with emscripten and hooked into javascript for use in the browser or node",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/potatolain/famitone2-tools-emscripten.git"
+  },
+  "keywords": [
+    "famitone2",
+    "nes",
+    "neslib"
+  ],
+  "author": "potatolain",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/potatolain/famitone2-tools-emscripten/issues"
+  },
+  "homepage": "https://github.com/potatolain/famitone2-tools-emscripten#readme",
+  "devDependencies": {
+    "jasmine": "^5.2.0"
+  }
+}
