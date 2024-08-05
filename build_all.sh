@@ -6,3 +6,11 @@ cd ../nsf2data
 emcc nsf2data.cpp -o nsf2data.js -s USE_ZLIB=1 -s EXPORTED_RUNTIME_METHODS="['FS', 'callMain']" -s ALLOW_MEMORY_GROWTH=1 -s MODULARIZE=1 -s EXPORT_NAME='createModule' -s USE_ES6_IMPORT_META=0
 cd ../text2data
 emcc text2data.cpp -o text2data.js -s USE_ZLIB=1 -s EXPORTED_RUNTIME_METHODS="['FS', 'callMain']" -s ALLOW_MEMORY_GROWTH=1 -s MODULARIZE=1 -s EXPORT_NAME='createModule' -s USE_ES6_IMPORT_META=0
+cd ../..
+mkdir -p dist
+cp shiru-tools/nesasmc/nesasmc.js dist/
+cp shiru-tools/nesasmc/nesasmc.wasm dist/
+cp shiru-tools/nesasmc/nsf2data.js dist/
+cp shiru-tools/nesasmc/nsf2data.wasm dist/
+cp shiru-tools/nesasmc/text2data.js dist/
+cp shiru-tools/nesasmc/text2data.wasm dist/
