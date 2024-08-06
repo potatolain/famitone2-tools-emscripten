@@ -18,7 +18,75 @@ down until the user needs this.
 
 ## Library Methods
 
-TBD
+### nsf2data (sound effect conversion)
+
+Usage: `nsf2data(nsfData, options)`
+
+**nsfData**: A uint8Array of data that a nsf file contains. If you're using node, you can get it like this:
+```javascript
+const nsfData = Uint8Array.from(fs.readFileSync('/path/to/sfx.nsf'))
+```
+
+**Options**: An object with parameters to configure the nsf generation
+
+| option    | Potential Values | Description                                    |
+|-----------|------------------|------------------------------------------------|
+| assembler | `asm6` or `ca65` | Which assembler to build for (Default: `ca65`) |
+| ntscOnly  | `true` or `false`| Whether to generate only ntsc (Default: false) |
+| palOnly   | `true` or `false`| Whether to generate only pal (Default: false)  |
+
+**Returns**: An object in the following format:
+```javascript
+    data: "; Assembly file output...", // This is the full text file output, in string form
+    size: 500, // How many bytes the exported data takes up
+    effects: 5, // How many sound effects were converted
+```
+
+**Example**:
+```javascript
+const testNsf = Uint8Array.from(fs.readFileSync('/path/to/file.nsf'))
+const result = await nsf2data(testNsf, {assembler: 'ca65', ntscOnly: true})
+console.log(result)
+```
+
+### text2data (music conversion)
+
+Usage: `text2data(textData, options)`
+
+**textData**: A string of music data usually found in music.txt. If you're using node, you can get it like this:
+```javascript
+const textData = fs.readFileSync('/path/to/music.txt').toString()
+```
+
+**Options**: An object with parameters to configure the nsf generation
+
+| option          | Potential Values  | Description                                                      |
+|-----------------|-------------------|------------------------------------------------------------------|
+| assembler       | `asm6` or `ca65`  | Which assembler to build for (Default: `ca65`)                   |
+| separateFiles   | `true` or `false` | Whether to break each song into a separate file (Default: false) |
+| channels        | Number `1`-`5`    | The number of channels to include (Default: 5)                   |
+| musicName       | Any string        | The name to use for the exported data. Will be postfixed with `_data` (Default: `music`) |
+
+**Returns**: An object in the following format:
+```javascript
+    data: "; Assembly file output...", // This is the full text file output, in string form
+    dataSize: 2000, // How many bytes the exported data takes up
+    dpcmSize: 50, // How many bytes dcpm takes up 
+    songs: 5, // How many songs were converted
+```
+
+If `separateFiles` is set to true, `data` will take a different format: 
+
+```javascript
+    data: [
+        "; Assembly file output 1...", // This is the full text file output, in string form
+        "; Assembly file output 2...",
+    ],
+    size: 2000, // How many bytes the exported data takes up
+    songs: 5, // How many songs were converted
+```
+
+
 
 ## License 
 

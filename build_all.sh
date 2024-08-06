@@ -15,5 +15,3 @@ cd shiru-tools
 build_tool nesasmc
 build_tool nsf2data
 build_tool text2data
-
-cp wrappers/* dist/
