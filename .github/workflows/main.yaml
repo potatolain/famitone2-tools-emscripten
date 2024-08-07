@@ -36,7 +36,7 @@ jobs:
         run: npm ci
       - name: version
         id: version
-        run: node -e "console.info('VERSION=v'+require('package.json').version) >> $GITHUB_OUTPUT"
+        run: node -e "console.info('VERSION=v'+require('package.json').version)" >> $GITHUB_OUTPUT
       - name: Archive Release
         uses: thedoctor0/zip-release@0.7.5
         with:
