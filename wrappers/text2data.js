@@ -67,18 +67,31 @@ async function text2data(textData, options) {
     // Parse stdout to send some meta information over
     const stdoutBreaks = stdout.split('\n').map(l => l.trim())
 
-    const successLine = stdoutBreaks.find(ln => ln.startsWith('Total data size'))
-    if (!successLine) {
-        throw new Error('Conversion failed! Error output follows: \n' + stdout)
-    }
-    const dpcmLine = stdoutBreaks.find(ln => ln.startsWith('DPCM samples:'))
-    const size = parseInt(successLine.substring(16), 10)
-    const dpcmSize = parseInt(dpcmLine.substring(14), 10)
+    let size = 0
+    let data
     const songLines = stdoutBreaks.filter(l => l.startsWith('Sub song'))
     const songs = songLines.length
 
-    logVerbose('Trying to read from', outputFile)
-    const data = Module.FS.readFile(outputFile, { encoding: 'utf8' })
+    if (!options.separateFiles) {
+        const successLine = stdoutBreaks.find(ln => ln.startsWith('Total data size'))
+        if (!successLine) {
+            throw new Error('Conversion failed! Error output follows: \n' + stdout)
+        }
+        size = parseInt(successLine.substring(16), 10)
+        logVerbose('Trying to read from', outputFile)
+        data = Module.FS.readFile(outputFile, { encoding: 'utf8' })
+    } else {
+        if (songs <= 0) {
+            throw new Error('Conversion failed! Error output follows: \n' + stdout)
+        }
+        songLines.forEach(v => size += parseInt(v.substring(11), 10))
+        logVerbose('Trying to read', songs, 'files from', outputFile, 'and numberic extensions')
+        data = songLines.map((_, songNo) => Module.FS.readFile(outputFile.replace('.', `_${songNo}.`), { encoding: 'utf8'}))
+    }
+
+    const dpcmLine = stdoutBreaks.find(ln => ln.startsWith('DPCM samples:'))
+    const dpcmSize = parseInt(dpcmLine.substring(14), 10)
+
     let dpcmData = new Uint8Array()
     if (dpcmSize > 0) {
         dpcmData = Module.FS.readFile(options.musicName + '.dmc')
