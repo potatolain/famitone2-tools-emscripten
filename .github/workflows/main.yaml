@@ -34,6 +34,8 @@ jobs:
         run: npm run build
       - name: Run unit tests
         run: npm ci
+      - name: Work around tar oddity
+        run: touch famitone2-tools-emscripten.tar.gz
       - name: Archive Release
         uses: thedoctor0/zip-release@0.7.5
         with:
