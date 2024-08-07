@@ -2,11 +2,16 @@ env:
   EM_VERSION: 3.1.64
   EM_CACHE_FOLDER: 'emsdk-cache'
 
-on: [push]
+on:
+  push: 
+    branches: main
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v2
       - name: Setup cache
@@ -19,9 +24,17 @@ jobs:
         with:
           version: ${{env.EM_VERSION}}
           actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org'
       - name: install
         run: npm install
       - name: Build library
         run: npm run build
       - name: Run unit tests
         run: npm ci
+      - name: Publish new version
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
