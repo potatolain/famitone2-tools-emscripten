@@ -37,9 +37,11 @@ const nsfData = Uint8Array.from(fs.readFileSync('/path/to/sfx.nsf'))
 
 **Returns**: An object in the following format:
 ```javascript
+{
     data: "; Assembly file output...", // This is the full text file output, in string form
     size: 500, // How many bytes the exported data takes up
-    effects: 5, // How many sound effects were converted
+    effects: 5 // How many sound effects were converted
+}
 ```
 
 **Example**:
@@ -69,24 +71,48 @@ const textData = fs.readFileSync('/path/to/music.txt').toString()
 
 **Returns**: An object in the following format:
 ```javascript
+ {
     data: "; Assembly file output...", // This is the full text file output, in string form
     dataSize: 2000, // How many bytes the exported data takes up
     dpcmSize: 50, // How many bytes dcpm takes up 
-    songs: 5, // How many songs were converted
+    songs: 5 // How many songs were converted
+}
 ```
 
 If `separateFiles` is set to true, `data` will take a different format: 
 
 ```javascript
+{
     data: [
         "; Assembly file output 1...", // This is the full text file output, in string form
         "; Assembly file output 2...",
     ],
     size: 2000, // How many bytes the exported data takes up
-    songs: 5, // How many songs were converted
+    songs: 5 // How many songs were converted
+}
 ```
 
+### nesasmc (Convert nesasm to ca65 and asm6)
 
+This is a little helper that came with the tool, which I believe was used on famitone2 itself.
+This is included in case you find it useful. 
+
+It has no specific options, just pass it an assembly file. Less checking is done on this than on
+// others. It also has no output, so we don't provide much. But, if you need it, it's here.
+
+Usage: `nesasmc(textData)`
+
+**textData**: A valid nesasm program, in a string.
+
+**Options**: None
+
+**Returns**: An object in the following format:
+```javascript
+{
+    ca65: "; ca65 code" // Source code in ca65 format
+    asm6: "; asm6 code" // Source code in asm6 format
+}
+```
 
 ## License 
 

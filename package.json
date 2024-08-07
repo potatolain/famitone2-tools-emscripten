@@ -2,7 +2,7 @@
   "name": "famitone2-tools-emscripten",
   "version": "1.0.0",
   "description": "Famitone2 tools compiled with emscripten and hooked into javascript for use in the browser or node",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build-emscripten": "build_all.sh",
     "build-js": "cp wrappers/* dist/",
