@@ -50,8 +50,8 @@ describe('text2data', () => {
         const results = await text2data(testTextDpcm, {assembler: 'ca65', musicName: 'dummy_dpcm'})
         writeab(results.data, expectedOutputCa65)
         expect(results).toEqual({
-            songs: 1,
-            size: 296, 
+            songs: 2,
+            size: 391, 
             dpcmSize: 1408,
             dpcmData: expectedDpcmData,
             data: expectedOutputCa65D
@@ -61,8 +61,8 @@ describe('text2data', () => {
     it('Compiles a simple txt to expected asm (asm6)', async () => {
         const results = await text2data(testTextDpcm, {assembler: 'asm6', musicName: 'dummy_dpcm'})
         expect(results).toEqual({
-            songs: 1,
-            size: 296, 
+            songs: 2,
+            size: 391, 
             dpcmSize: 1408,
             dpcmData: expectedDpcmData,
             data: expectedOutputAsm6D
