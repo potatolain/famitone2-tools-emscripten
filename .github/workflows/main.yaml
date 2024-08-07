@@ -2,6 +2,8 @@ env:
   EM_VERSION: 3.1.64
   EM_CACHE_FOLDER: 'emsdk-cache'
 
+on: [push]
+
 jobs:
   test:
     runs-on: ubuntu-latest
