@@ -37,7 +37,7 @@ jobs:
       - name: Archive Release
         uses: thedoctor0/zip-release@0.7.5
         with:
-          type: 'tar'
+          type: 'zip'
           filename: 'famitone2-tools-emscripten.zip'
           directory: dist
       - name: Create Draft Release
@@ -58,7 +58,7 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: .
           asset_name: famitone2-tools-emscripten.zip
-          asset_content_type: application/gzip
+          asset_content_type: application/zip
 
       - uses: eregon/publish-release@v1
         env:
