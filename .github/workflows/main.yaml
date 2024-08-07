@@ -34,6 +34,9 @@ jobs:
         run: npm run build
       - name: Run unit tests
         run: npm ci
+      - name: version
+        id: version
+        run: node -e "console.info('VERSION=v'+require('package.json').version) >> $GITHUB_OUTPUT"
       - name: Archive Release
         uses: thedoctor0/zip-release@0.7.5
         with:
@@ -46,8 +49,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v$(node -e "require('package.json').version")
-          release_name: v$(node -e "require('package.json').version")
+          tag_name: ${{ steps.version.outputs.VERSION }}
+          release_name: ${{ steps.version.outputs.VERSION }}
           draft: true
           prerelease: false
 
