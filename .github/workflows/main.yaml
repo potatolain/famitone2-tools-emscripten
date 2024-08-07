@@ -34,6 +34,38 @@ jobs:
         run: npm run build
       - name: Run unit tests
         run: npm ci
+      - name: Archive Release
+        uses: thedoctor0/zip-release@0.7.5
+        with:
+          type: 'tar'
+          filename: 'famitone2-tools-emscripten.tar.gz'
+          directory: dist
+      - name: Create Draft Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v$(node -e "require('package.json').version")
+          release_name: v$(node -e "require('package.json').version")
+          draft: true
+          prerelease: false
+
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: .
+          asset_name: famitone2-tools-emscripten.tar.gz
+          asset_content_type: application/gzip
+
+      - uses: eregon/publish-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.create_release.outputs.id }}
+
       - name: Publish new version
         run: npm publish --access public
         env:
