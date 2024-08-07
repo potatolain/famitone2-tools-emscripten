@@ -20,6 +20,6 @@ jobs:
           version: ${{env.EM_VERSION}}
           actions-cache-folder: ${{env.EM_CACHE_FOLDER}}
       - name: Build library
-        run: ./build_all.sh
+        run: npm run build-all
       - name: Run unit tests
         run: npm test
