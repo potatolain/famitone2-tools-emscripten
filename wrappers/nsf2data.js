@@ -20,7 +20,7 @@ async function nsf2data(nsfData, options) {
         assembler: 'ca65',
         ...(options ?? {})
     }
-    const additionalArgs = [];
+    const additionalArgs = []
     if (options.ntscOnly) {
         additionalArgs.push('-ntsc')
     }
@@ -38,13 +38,16 @@ async function nsf2data(nsfData, options) {
     const createModule = require('./emscripten/nsf2data')
     let stdout = ''
     const Module = await createModule({
-        print: str => { stdout += str + '\n'; logVerbose('[stdout]', str) },
+        print: str => { 
+            stdout += str + '\n'
+            logVerbose('[stdout]', str) 
+        },
         setStatus: status => logVerbose('Status updated to', status)
     })
 
     // This is a bit duct-tape-y but I can't be bothered to do it right. Clear stdout
     // before we run a second time. (This could be avoided by changing how we export things in emscripten)
-    stdout = '';
+    stdout = ''
 
     Module.FS.writeFile('file.nsf', nsfData)
     logVerbose('Sending arguments', JSON.stringify(['file.nsf', ...additionalArgs]))
@@ -68,7 +71,7 @@ async function nsf2data(nsfData, options) {
         data,
         size,
         effects
-    };
+    }
 }
 
 if (typeof window !== 'undefined') { window.nsf2data = nsf2data }

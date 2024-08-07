@@ -21,7 +21,7 @@ async function text2data(textData, options) {
         musicName: 'music',
         ...(options ?? {})
     }
-    const additionalArgs = [];
+    const additionalArgs = []
 
     if (options.separateFiles) {
         additionalArgs.push('-s')
@@ -52,13 +52,16 @@ async function text2data(textData, options) {
     const createModule = require('./emscripten/text2data')
     let stdout = ''
     const Module = await createModule({
-        print: str => { stdout += str + '\n'; logVerbose('[stdout]', str) },
+        print: str => { 
+            stdout += str + '\n'
+            logVerbose('[stdout]', str) 
+        },
         setStatus: status => logVerbose('Status updated to', status)
     })
 
     // This is a bit duct-tape-y but I can't be bothered to do it right. Clear stdout
     // before we run a second time. (This could be avoided by changing how we export things in emscripten)
-    stdout = '';
+    stdout = ''
 
     Module.FS.writeFile(`${options.musicName}.txt`, textData)
     logVerbose('Sending arguments', JSON.stringify([`${options.musicName}.txt`, ...additionalArgs]))
@@ -103,7 +106,7 @@ async function text2data(textData, options) {
         dpcmSize,
         dpcmData,
         songs
-    };
+    }
 }
 
 if (typeof window !== 'undefined') { window.text2data = text2data }

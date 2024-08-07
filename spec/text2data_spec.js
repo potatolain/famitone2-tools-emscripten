@@ -7,32 +7,26 @@ const testText = fs.readFileSync(__dirname + '/../test-data/dummy.txt').toString
     expectedOutputAsm6 = fs.readFileSync(__dirname + '/../test-data/dummy.asm').toString(),
     expectedOutputCa65D = fs.readFileSync(__dirname + '/../test-data/dummy_dpcm.s').toString(),
     expectedOutputAsm6D = fs.readFileSync(__dirname + '/../test-data/dummy_dpcm.asm').toString(),
-    expectedDpcmData = new Uint8Array(fs.readFileSync(__dirname + '/../test-data/dummy_dpcm.dmc'));
+    expectedDpcmData = new Uint8Array(fs.readFileSync(__dirname + '/../test-data/dummy_dpcm.dmc'))
 
 const testFiles = fs.readdirSync(__dirname + '/../test-data/'),
     ca65SingleFiles = testFiles.filter(a => a.startsWith('dummy_dpcm_') && a.indexOf('ch') === -1 && a.endsWith('.s')).sort()
         .map(f => fs.readFileSync(__dirname + '/../test-data/' + f).toString()),
     asm6SingleFiles = testFiles.filter(a => a.startsWith('dummy_dpcm_') && a.indexOf('ch') === -1 && a.endsWith('.asm')).sort()
-        .map(f => fs.readFileSync(__dirname + '/../test-data/' + f).toString());
+        .map(f => fs.readFileSync(__dirname + '/../test-data/' + f).toString())
 
 const channelTestCa65 = testFiles.filter(f => f.startsWith('dummy_dpcm_ch') && f.endsWith('.s')).sort(),
     channelTestAsm6 = testFiles.filter(f => f.startsWith('dummy_dpcm_ch') && f.endsWith('.asm')).sort(),
     channelTestDataCa65 = channelTestCa65.map(f => fs.readFileSync(__dirname + '/../test-data/' + f).toString()),
-    channelTestDataAsm6 = channelTestAsm6.map(f => fs.readFileSync(__dirname + '/../test-data/' + f).toString());
+    channelTestDataAsm6 = channelTestAsm6.map(f => fs.readFileSync(__dirname + '/../test-data/' + f).toString())
 
 // NOTE: These aren't really the best tests ever, this just validates the output matches what the
 // windows binary produces. The string parsing could be separated into different tests. This is
 // sort of a quick-and-dirty solution, improvements welcome.
 
-function writeab(a, b) {
-    fs.writeFileSync(__dirname + '/../test-data/a.s', a)
-    fs.writeFileSync(__dirname + '/../test-data/b.s', b)
-}
-
 describe('text2data', () => {
     it('Compiles a simple txt to expected asm (ca65)', async () => {
         const results = await text2data(testText, {assembler: 'ca65', musicName: 'dummy'})
-        writeab(results.data, expectedOutputCa65)
         expect(results).toEqual({
             songs: 1,
             size: 86, 

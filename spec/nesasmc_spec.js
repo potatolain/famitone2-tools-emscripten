@@ -3,7 +3,7 @@ const nesasmc = require('../dist/nesasmc'),
 
 const testInput = fs.readFileSync(__dirname + '/../test-data/background.asm').toString(),
     expectedOutputCa65 = fs.readFileSync(__dirname + '/../test-data/background.s').toString(),
-    expectedOutputAsm6 = fs.readFileSync(__dirname + '/../test-data/background_asm6.asm').toString();
+    expectedOutputAsm6 = fs.readFileSync(__dirname + '/../test-data/background_asm6.asm').toString()
 
 // NOTE: These aren't really the best tests ever, this just validates the output matches what the
 // windows binary produces. The string parsing could be separated into different tests. This is
