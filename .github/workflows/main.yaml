@@ -34,13 +34,11 @@ jobs:
         run: npm run build
       - name: Run unit tests
         run: npm ci
-      - name: Work around tar oddity
-        run: touch famitone2-tools-emscripten.tar.gz
       - name: Archive Release
         uses: thedoctor0/zip-release@0.7.5
         with:
           type: 'tar'
-          filename: 'famitone2-tools-emscripten.tar.gz'
+          filename: 'famitone2-tools-emscripten.zip'
           directory: dist
       - name: Create Draft Release
         id: create_release
@@ -59,7 +57,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: .
-          asset_name: famitone2-tools-emscripten.tar.gz
+          asset_name: famitone2-tools-emscripten.zip
           asset_content_type: application/gzip
 
       - uses: eregon/publish-release@v1
