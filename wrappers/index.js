@@ -1,4 +1,4 @@
-const nsf2data = require('./nsfdata'),
+const nsf2data = require('./nsf2data'),
     text2data = require('./text2data'),
     nesasmc = require('./nesasmc')
 
