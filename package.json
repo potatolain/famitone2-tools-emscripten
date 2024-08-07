@@ -4,7 +4,7 @@
   "description": "Famitone2 tools compiled with emscripten and hooked into javascript for use in the browser or node",
   "main": "dist/index.js",
   "scripts": {
-    "build-emscripten": "build_all.sh",
+    "build-emscripten": "sh build_all.sh",
     "build-js": "cp wrappers/* dist/",
     "test": "jasmine",
     "test-watch": "nodemon --exec \"npm run build-js && npm test\" --watch wrappers --watch spec"
@@ -26,5 +26,7 @@
   "homepage": "https://github.com/potatolain/famitone2-tools-emscripten#readme",
   "devDependencies": {
     "jasmine": "^5.2.0"
-  }
+  },
+  "files": ["dist/**"]
+
 }
