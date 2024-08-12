@@ -29,11 +29,12 @@ const nsfData = Uint8Array.from(fs.readFileSync('/path/to/sfx.nsf'))
 
 **Options**: An object with parameters to configure the nsf generation
 
-| option    | Potential Values | Description                                    |
-|-----------|------------------|------------------------------------------------|
-| assembler | `asm6` or `ca65` | Which assembler to build for (Default: `ca65`) |
-| ntscOnly  | `true` or `false`| Whether to generate only ntsc (Default: false) |
-| palOnly   | `true` or `false`| Whether to generate only pal (Default: false)  |
+| option         | Potential Values | Description                                    |
+|----------------|------------------|------------------------------------------------|
+| assembler      | `asm6` or `ca65` | Which assembler to build for (Default: `ca65`) |
+| ntscOnly       | `true` or `false`| Whether to generate only ntsc (Default: false) |
+| palOnly        | `true` or `false`| Whether to generate only pal (Default: false)  |
+| moduleSettings | Any `object`     | Settings to pass through to emscripten's module|
 
 **Returns**: An object in the following format:
 ```javascript
@@ -68,6 +69,8 @@ const textData = fs.readFileSync('/path/to/music.txt').toString()
 | separateFiles   | `true` or `false` | Whether to break each song into a separate file (Default: false) |
 | channels        | Number `1`-`5`    | The number of channels to include (Default: 5)                   |
 | musicName       | Any string        | The name to use for the exported data. Will be postfixed with `_data` (Default: `music`) |
+| moduleSettings  | Any `object`      | Settings to pass through to emscripten's module |
+
 
 **Returns**: An object in the following format:
 ```javascript
@@ -104,7 +107,11 @@ Usage: `nesasmc(textData)`
 
 **textData**: A valid nesasm program, in a string.
 
-**Options**: None
+**Options**: An object with parameters to configure asm conversion
+| option          | Potential Values  | Description                                     |
+|-----------------|-------------------|-------------------------------------------------|
+| moduleSettings  | Any `object`      | Settings to pass through to emscripten's module |
+
 
 **Returns**: An object in the following format:
 ```javascript

@@ -20,7 +20,8 @@ async function nesasmc(textData, options = {}) {
             stdout += str + '\n'
             logVerbose('[stdout]', str) 
         },
-        setStatus: status => logVerbose('Status updated to', status)
+        setStatus: status => logVerbose('Status updated to', status),
+        ...(options.moduleSettings ?? {})
     })
 
     // This is a bit duct-tape-y but I can't be bothered to do it right. Clear stdout

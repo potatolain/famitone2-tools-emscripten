@@ -1,6 +1,6 @@
 {
   "name": "famitone2-tools-emscripten",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Famitone2 tools compiled with emscripten and hooked into javascript for use in the browser or node",
   "main": "dist/index.js",
   "scripts": {
